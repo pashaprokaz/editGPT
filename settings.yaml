@@ -1,0 +1,35 @@
+# The default configuration file.
+# Syntax in `edit_gpt/settings/settings.py`
+
+chat_model:
+  provider: ollama
+  model: llama3
+  temperature: 0.2
+  top_p: 0.5
+
+rag:
+  similarity_top_k: 5
+
+
+web_search:
+  provider: duckduckgo
+  k: 5
+
+agent:
+  max_iterations: 5
+  use_web_search: True
+  edit_files: True
+  additional_stop_sequences: [ "<|eot_id|>" ] # workaround for llama3
+
+embeddings:
+  model: sentence-transformers/all-mpnet-base-v2
+
+history:
+  type: vector
+  n: 3
+  k: 2
+
+
+# need LANGCHAIN_TRACING_V2, LANGCHAIN_ENDPOINT, LANGCHAIN_API_KEY
+langsmith:
+  use_langsmith: False

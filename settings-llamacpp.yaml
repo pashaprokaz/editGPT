@@ -1,0 +1,5 @@
+chat_model:
+  provider: llamacpp
+  model: solar-10.7b-instruct-v1.0-uncensored.Q5_K_M.gguf # path to your LLM model
+  temperature: 0.2
+  top_p: 0.5

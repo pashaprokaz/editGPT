@@ -1,0 +1,11 @@
+# need FIREWORKS_API_KEY
+
+chat_model:
+  provider: fireworks
+  model: accounts/fireworks/models/llama-v3-70b-instruct
+  temperature: 0.2
+  top_p: 0.5
+
+agent:
+  additional_stop_sequences: [ "<|eot_id|>" ] # workaround for llama3
+  max_iterations: 10

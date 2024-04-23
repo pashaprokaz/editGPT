@@ -1,0 +1,6 @@
+chat_model:
+  provider: fake
+  model: fake
+
+embeddings:
+  model: fake
