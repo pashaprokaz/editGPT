@@ -8,6 +8,11 @@ Currently, the document editing feature is based on the [`ReAct agent`](https://
 
 **Important!** This project is at a super early stage of development and testing, so there are many bugs and broken features. It is also important to understand that the quality of the agent directly depends on the LLM used.
 
+## Demo
+https://github.com/pashaprokaz/editGPT/assets/46126524/5a8811ba-a618-4276-8b51-2abbdb4af124
+
+
+
 ## Installation
 
 Clone the repository:
