@@ -13,25 +13,13 @@ from edit_gpt.settings.yaml_loader import load_yaml_with_envvars
 
 logger = logging.getLogger(__name__)
 
-_settings_folder = os.environ.get("EGPT_SETTINGS_FOLDER", PROJECT_ROOT_PATH)
-
-# if running in unittest, use the test profile
-_test_profile = ["test"] if "tests" in sys.modules else []
-egpt_profiles = os.environ.get("EGPT_PROFILES", "")
-egpt_profiles = egpt_profiles.split(",") if egpt_profiles is not None else []
-
-active_profiles: list[str] = unique_list(
-    ["default"]
-    + [item.strip() for item in egpt_profiles if item.strip()]
-    + _test_profile
-)
-
 
 def merge_settings(settings: Iterable[dict[str, Any]]) -> dict[str, Any]:
     return functools.reduce(deep_update, settings, {})
 
 
 def load_settings_from_profile(profile: str) -> dict[str, Any]:
+    _settings_folder = os.environ.get("EGPT_SETTINGS_FOLDER", PROJECT_ROOT_PATH)
     if profile == "default":
         profile_file_name = "settings.yaml"
     else:
@@ -47,6 +35,17 @@ def load_settings_from_profile(profile: str) -> dict[str, Any]:
 
 def load_active_settings() -> dict[str, Any]:
     """Load active profiles and merge them."""
+    # if running in unittest, use the test profile
+    _test_profile = ["test"] if "tests" in sys.modules else []
+    egpt_profiles = os.environ.get("EGPT_PROFILES", "")
+    egpt_profiles = egpt_profiles.split(",") if egpt_profiles is not None else []
+
+    active_profiles: list[str] = unique_list(
+        ["default"]
+        + [item.strip() for item in egpt_profiles if item.strip()]
+        + _test_profile
+    )
+
     logger.info("Starting application with profiles=%s", active_profiles)
     loaded_profiles = [
         load_settings_from_profile(profile) for profile in active_profiles
